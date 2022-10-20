@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">sportsSpace</string>
+    <string name="navigator_open">Open nav</string>
+    <string name="navigator_close">close nav</string>
 </resources>
