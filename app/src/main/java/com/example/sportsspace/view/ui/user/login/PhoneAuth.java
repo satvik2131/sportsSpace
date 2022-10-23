@@ -1,4 +1,4 @@
-package com.example.sportsspace.view.ui.login;
+package com.example.sportsspace.view.ui.user.login;
 
 import android.os.Bundle;
 
@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sportsspace.R;
 
-public class OTPVerify extends AppCompatActivity {
+public class PhoneAuth extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.confirm_otp);
+        setContentView(R.layout.login);
     }
 }

@@ -28,11 +28,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".view.ui.login.PhoneAuth" />
+        <activity android:name=".view.ui.user.login.PhoneAuth" />
         <activity
-            android:name=".view.ui.dashboard.UserDashboard"
+            android:name=".view.ui.user.dashboard.UserHome"
              />
-        <activity android:name=".view.ui.login.OTPVerify" />
+        <activity android:name=".view.ui.user.login.OTPVerify" />
+
+         <!--Admin-->
+        <activity android:name=".view.ui.admin.login.AdminLogin"/>
+        <activity android:name=".view.ui.admin.adminhome.AdminHome"/>
     </application>
 
 </manifest>

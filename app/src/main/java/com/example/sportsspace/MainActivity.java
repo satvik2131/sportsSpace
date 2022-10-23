@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-import com.example.sportsspace.view.ui.dashboard.UserDashboard;
-import com.example.sportsspace.view.ui.login.OTPVerify;
-import com.example.sportsspace.view.ui.login.PhoneAuth;
+import com.example.sportsspace.view.ui.admin.adminhome.AdminHome;
+import com.example.sportsspace.view.ui.admin.login.AdminLogin;
+import com.example.sportsspace.view.ui.user.dashboard.UserHome;
+import com.example.sportsspace.view.ui.user.login.OTPVerify;
+import com.example.sportsspace.view.ui.user.login.PhoneAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,5 +28,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, OTPVerify.class));
     }
 
-    public void moveToDashboard(View view) {startActivity(new Intent(getBaseContext(), UserDashboard.class));}
+    public void moveToDashboard(View view) {
+        startActivity(new Intent(getBaseContext(), UserHome.class));
+    }
+
+    public void moveToAdminLogin(View view) {
+        startActivity(new Intent(getBaseContext(), AdminLogin.class));
+    }
+
+    public void moveToAdminHome(View view) {
+        startActivity(new Intent(getBaseContext(), AdminHome.class));
+    }
 }
