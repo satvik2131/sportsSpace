@@ -36,7 +36,8 @@
 
          <!--Admin-->
         <activity android:name=".view.ui.admin.login.AdminLogin"/>
-        <activity android:name=".view.ui.admin.adminhome.AdminHome"/>
+        <activity
+            android:name=".view.ui.admin.adminhome.AdminHome" />
     </application>
 
 </manifest>

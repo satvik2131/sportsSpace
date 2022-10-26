@@ -19,4 +19,12 @@
         android:icon="@drawable/booked_slots"
         android:title="Booked Slots"/>
 
+    <item
+        android:id="@+id/page_4"
+        android:enabled="true"
+        android:icon="@drawable/logout"
+        android:title="Logout"/>
+
+
+
 </menu>
