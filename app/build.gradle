@@ -25,6 +25,8 @@ android {
                     //Admin
                     'src/main/res/layouts/admin/login',
                     'src/main/res/layouts/admin/adminhome',
+                    'src/main/res/layouts/admin/adminhome/user_requests',
+                    'src/main/res/layouts/admin/adminhome/add_sports',
 
 
 
@@ -84,7 +86,6 @@ dependencies {
 
     //Fragment
     implementation "androidx.fragment:fragment:1.5.3"
-
 
 
 }

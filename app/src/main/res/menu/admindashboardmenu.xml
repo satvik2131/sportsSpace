@@ -2,6 +2,13 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/admin_dashboard"
+        android:checkable="true"
+        android:title="Dashboard"
+        android:icon="@drawable/dashboard"
+        />
+
     <!--    For adding user requests -->
     <item
         android:id="@+id/admin_user_requests"
@@ -20,7 +27,7 @@
 
     <item
         android:id="@+id/admin_add_info_dashboard"
-        android:checkable="false"
+        android:checkable="true"
         android:icon="@drawable/add_dashboard"
         android:title="Add Info (Dashboard)" />
 
@@ -28,6 +35,7 @@
     <item
         android:id = "@+id/add_remove_user"
         android:title="Add/Remove User"
+        android:checkable="true"
         android:icon="@drawable/add_remove_user"
         />
 
@@ -35,7 +43,10 @@
     <item
         android:id="@+id/admin_logout"
         android:icon="@drawable/logout"
+        android:checkable="true"
         android:title="Logout" />
 
-
 </menu>
+
+
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/Widget.Material3.CardView.Elevated"
+    android:layout_margin="20sp">
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       >
+
+<!--       Name and phone Number-->
+       <LinearLayout
+           android:id="@+id/linearLayout"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_margin="20sp"
+           android:orientation="vertical"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent">
+
+           <com.google.android.material.textview.MaterialTextView
+               android:id="@+id/username"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:fontFamily="@font/gotham"
+               android:text="Satvik Kushwaha" />
+
+           <com.google.android.material.textview.MaterialTextView
+               android:id="@+id/user_phone_no"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:fontFamily="@font/calibri"
+               android:text="7509593038" />
+
+       </LinearLayout>
+
+
+
+<!--        Accept and reject -->
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_vertical"
+           android:orientation="horizontal"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toTopOf="parent">
+
+           <ImageButton
+               android:id="@+id/accept_user"
+               android:layout_width="50sp"
+               android:layout_height="50sp"
+                android:background="@null"
+               android:src="@drawable/accept_user" />
+
+           <ImageButton
+               android:id="@+id/reject_user"
+               android:layout_width="50sp"
+               android:layout_height="50sp"
+               android:layout_marginLeft="20sp"
+               android:background="@null"
+               android:src="@drawable/reject_user" />
+       </LinearLayout>
+
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

@@ -33,12 +33,11 @@ public class UserHome extends AppCompatActivity {
         }
 
 
-        //Setting NavBar Listener
+        //User Navigation
         navigationView = findViewById(R.id.navigation_view);
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.d("Itm--", item.getTitle().toString());
 
                 switch (item.getTitle().toString()) {
                     case "Dashboard":
