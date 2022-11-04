@@ -1,4 +1,4 @@
-package com.example.sportsspace.view.ui.admin.adminhome.Fragments.UserRequests;
+package com.example.sportsspace.view.ui.admin.adminhome.Fragments.user_requests;
 
 import android.view.LayoutInflater;
 import android.view.View;

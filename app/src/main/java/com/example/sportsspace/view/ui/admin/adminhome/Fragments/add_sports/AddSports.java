@@ -1,4 +1,4 @@
-package com.example.sportsspace.view.ui.admin.adminhome.Fragments.AddSports;
+package com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_sports;
 
 import androidx.fragment.app.Fragment;
 

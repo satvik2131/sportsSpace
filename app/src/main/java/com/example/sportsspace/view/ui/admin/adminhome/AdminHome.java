@@ -2,7 +2,6 @@ package com.example.sportsspace.view.ui.admin.adminhome;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +14,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.sportsspace.R;
-import com.example.sportsspace.view.ui.admin.adminhome.Fragments.UserRequests.UserRequests;
-import com.example.sportsspace.view.ui.user.dashboard.Fragments.BookSlots;
+import com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_info.AddInfoDashboard;
+import com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_sports.AddSports;
+import com.example.sportsspace.view.ui.admin.adminhome.Fragments.existingremoveuser.ExistingRemoveUser;
+import com.example.sportsspace.view.ui.admin.adminhome.Fragments.user_requests.UserRequests;
 import com.example.sportsspace.view.ui.user.dashboard.Fragments.BookedSlots;
 import com.example.sportsspace.view.ui.user.dashboard.Fragments.Dashboard;
 import com.google.android.material.navigation.NavigationView;
@@ -73,37 +74,32 @@ public class AdminHome extends AppCompatActivity {
                     case "Add Sports":
                         fragmentManager
                                 .beginTransaction()
-                                .replace(R.id.fragment_container_view, BookedSlots.class, null)
+                                .replace(R.id.admin_fragment, AddSports.class, null)
                                 .setReorderingAllowed(true)
                                 .commit();
                         drawerLayout.close();
                         break;
 
-                    case "Add Info(Dashboard)":
+                    case "Add Info (Dashboard)":
                         fragmentManager
                                 .beginTransaction()
-                                .replace(R.id.fragment_container_view, BookedSlots.class, null)
+                                .replace(R.id.admin_fragment, AddInfoDashboard.class, null)
                                 .setReorderingAllowed(true)
                                 .commit();
                         drawerLayout.close();
                         break;
 
-                    case "Add/Remove User":
+                    case "Existing/Remove User":
                         fragmentManager
                                 .beginTransaction()
-                                .replace(R.id.fragment_container_view, BookedSlots.class, null)
+                                .replace(R.id.admin_fragment, ExistingRemoveUser.class, null)
                                 .setReorderingAllowed(true)
                                 .commit();
                         drawerLayout.close();
                         break;
 
                     case "Logout":
-                        fragmentManager
-                                .beginTransaction()
-                                .replace(R.id.fragment_container_view, BookedSlots.class, null)
-                                .setReorderingAllowed(true)
-                                .commit();
-                        drawerLayout.close();
+                        //Implement Logout functionality here
                         break;
                 }
                 return false;

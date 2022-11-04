@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.dagger.hilt.android'
+    id 'com.google.gms.google-services'
+
 }
+
 
 android {
     namespace 'com.example.sportsspace'
@@ -16,8 +20,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-
-
     sourceSets {
         main {
             res.srcDirs = [
@@ -27,7 +29,8 @@ android {
                     'src/main/res/layouts/admin/adminhome',
                     'src/main/res/layouts/admin/adminhome/user_requests',
                     'src/main/res/layouts/admin/adminhome/add_sports',
-
+                    'src/main/res/layouts/admin/adminhome/add_info_dashboard',
+                    'src/main/res/layouts/admin/adminhome/existing_remove_user',
 
 
                     //User
@@ -53,7 +56,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildFeatures {
-        viewBinding true
+        dataBinding = true
+        viewBinding = true
     }
     sourceSets {
         main {
@@ -78,14 +82,25 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation 'android.arch.lifecycle:extensions:1.0.0'
-
-    //Material Design
-    implementation 'com.google.android.material:material:1.5.0'
-
+    //Lifecycle extension
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
 
     //Fragment
     implementation "androidx.fragment:fragment:1.5.3"
 
 
+    //Firebase
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth'
+
+
+    //Dependency Injection
+    implementation "com.google.dagger:hilt-android:2.44"
+    annotationProcessor("com.google.dagger:hilt-compiler:2.44")
+
 }
+

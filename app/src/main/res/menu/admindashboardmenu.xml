@@ -34,7 +34,7 @@
 
     <item
         android:id = "@+id/add_remove_user"
-        android:title="Add/Remove User"
+        android:title="Existing/Remove User"
         android:checkable="true"
         android:icon="@drawable/add_remove_user"
         />
