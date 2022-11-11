@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10sp"
-                android:name="com.example.sportsspace.view.ui.user.dashboard.Fragments.Dashboard"
+                android:name="com.example.sportsspace.view.ui.common.DashboardFragment"
                 />
 
         </com.google.android.material.appbar.AppBarLayout>

@@ -2,7 +2,6 @@ package com.example.sportsspace.view.ui.user.dashboard;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -13,10 +12,14 @@ import androidx.fragment.app.FragmentManager;
 import com.example.sportsspace.R;
 import com.example.sportsspace.view.ui.user.dashboard.Fragments.BookSlots;
 import com.example.sportsspace.view.ui.user.dashboard.Fragments.BookedSlots;
-import com.example.sportsspace.view.ui.user.dashboard.Fragments.Dashboard;
+import com.example.sportsspace.view.ui.common.DashboardFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+
+@AndroidEntryPoint
 public class UserHome extends AppCompatActivity {
 
     BottomNavigationView navigationView;
@@ -44,7 +47,7 @@ public class UserHome extends AppCompatActivity {
                         item.setChecked(true);
                         fragmentManager
                                 .beginTransaction()
-                                .replace(R.id.fragment_container_view, Dashboard.class, null)
+                                .replace(R.id.fragment_container_view, DashboardFragment.class, null)
                                 .setReorderingAllowed(true)
                                 .commit();
                         break;

@@ -18,11 +18,12 @@ import com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_info.AddInf
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_sports.AddSports;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.existingremoveuser.ExistingRemoveUser;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.user_requests.UserRequests;
-import com.example.sportsspace.view.ui.user.dashboard.Fragments.BookedSlots;
-import com.example.sportsspace.view.ui.user.dashboard.Fragments.Dashboard;
+import com.example.sportsspace.view.ui.common.DashboardFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class AdminHome extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -57,7 +58,7 @@ public class AdminHome extends AppCompatActivity {
                     case "Dashboard":
                         fragmentManager
                                 .beginTransaction()
-                                .replace(R.id.admin_fragment, Dashboard.class, null)
+                                .replace(R.id.admin_fragment, DashboardFragment.class, null)
                                 .setReorderingAllowed(true)
                                 .commit();
 

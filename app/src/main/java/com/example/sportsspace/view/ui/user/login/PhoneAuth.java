@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import com.example.sportsspace.R;
 import com.example.sportsspace.databinding.LoginBinding;
 import com.example.sportsspace.utils.Auth;
-import com.example.sportsspace.viewmodel.LoginVM;
+import com.example.sportsspace.viewmodels.LoginVM;
 
 import javax.inject.Inject;
 
@@ -27,7 +27,7 @@ public class PhoneAuth extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         LoginBinding loginBinding = DataBindingUtil.setContentView(
                 this,R.layout.login);
-        loginBinding.setLoginVM(new LoginVM(auth));
+        loginBinding.setLoginVM(new LoginVM(auth,this));
         loginBinding.executePendingBindings();
     }
 }

@@ -11,7 +11,7 @@ import com.example.sportsspace.R;
 
 import java.util.List;
 
-public class ExistingUsersAdapter extends RecyclerView.Adapter<com.example.sportsspace.view.ui.admin.adminhome.Fragments.existingremoveuser.ExistingUsersAdapter.ViewHolder> {
+public class ExistingUsersAdapter extends RecyclerView.Adapter<ExistingUsersAdapter.ViewHolder> {
     private List<String> username;
     private List<String> phoneno;
 
@@ -37,17 +37,17 @@ public class ExistingUsersAdapter extends RecyclerView.Adapter<com.example.sport
 
     // Create new views (invoked by the layout manager)
     @Override
-    public com.example.sportsspace.view.ui.admin.adminhome.Fragments.existingremoveuser.ExistingUsersAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.user_request_card, viewGroup, false);
 
-        return new com.example.sportsspace.view.ui.admin.adminhome.Fragments.existingremoveuser.ExistingUsersAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(com.example.sportsspace.view.ui.admin.adminhome.Fragments.existingremoveuser.ExistingUsersAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         viewHolder.usernameTV.setText(username.get(position));
         viewHolder.phonenoTV.setText(phoneno.get(position));

@@ -1,66 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    android:id="@+id/information_card"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    app:cardElevation="3dp"
-    app:cardMaxElevation="4dp"
-    app:cardUseCompatPadding="true"
-    android:layout_margin="16sp"
-    android:layout_marginHorizontal="40sp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="dashboardmodel"
+            type="com.example.sportsspace.model.dashboardmodel.DashboardModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/information_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/headerTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Notice"
-            android:textSize="25sp"
-            android:gravity="center"
-            />
-
-        <TextView
-            android:id="@+id/contentTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="30sp"
-            android:gravity="center"
-            android:text="This is to inform students that tomorrow will be holiday"
-            android:textSize="16sp"
-            android:layout_gravity="top"
-            />
-
+        style="@style/Widget.Material3.CardView.Elevated"
+        android:orientation="vertical"
+        app:cardElevation="3dp"
+        app:cardMaxElevation="4dp"
+        app:cardUseCompatPadding="true"
+        android:layout_margin="16sp"
+        android:layout_marginHorizontal="40sp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="5sp"
-            android:gravity="center"
-            >
-            <!--Date-->
-            <TextView
-                android:id="@+id/dateTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="23-08-22"
-                />
+            android:orientation="vertical">
 
-            <!--Time-->
             <TextView
-                android:id="@+id/timeTV"
-                android:layout_width="wrap_content"
+                android:id="@+id/headerTV"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10sp"
-                android:text="9:30 AM"
-                />
+                android:text="@{dashboardmodel.title}"
+                android:layout_marginTop="15sp"
+                android:textSize="25sp"
+                android:gravity="center" />
 
+            <TextView
+                android:id="@+id/contentTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30sp"
+                android:gravity="center"
+                android:text="@{dashboardmodel.description}"
+                android:textSize="16sp"
+                android:layout_gravity="top" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10sp"
+                android:gravity="center">
+                <!--Date-->
+                <TextView
+                    android:id="@+id/dateTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{dashboardmodel.timestamp.toString()}" />
+
+                <!--                &lt;!&ndash;Time&ndash;&gt;-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/timeTV"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="10sp"-->
+                <!--                    android:text="9:30 AM" />-->
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

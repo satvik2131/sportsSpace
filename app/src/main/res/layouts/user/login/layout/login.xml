@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="loginVM"
-            type="com.example.sportsspace.viewmodel.LoginVM" />
+            type="com.example.sportsspace.viewmodels.LoginVM" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -155,7 +155,7 @@
                         android:background="@drawable/buttonshape"
                         android:fontFamily="@font/gotham"
                         android:text="Generate OTP"
-                        android:onClick="@{()->loginVM.OtpSent(context)}"
+                        android:onClick="@{()->loginVM.OtpSent()}"
                         android:textAllCaps="false"
                         android:textColor="#ffffff"
                         android:textSize="16sp" />

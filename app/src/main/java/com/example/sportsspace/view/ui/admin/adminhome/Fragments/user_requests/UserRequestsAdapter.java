@@ -38,17 +38,17 @@ public class UserRequestsAdapter extends RecyclerView.Adapter<UserRequestsAdapte
 
     // Create new views (invoked by the layout manager)
     @Override
-    public UserRequestsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.user_request_card, viewGroup, false);
 
-        return new UserRequestsAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(UserRequestsAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         viewHolder.usernameTV.setText(username.get(position));
         viewHolder.phonenoTV.setText(phoneno.get(position));
