@@ -1,23 +1,26 @@
 package com.example.sportsspace.view.ui.user.dashboard.utils;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsspace.R;
 import com.example.sportsspace.databinding.DashboardCardViewBinding;
 import com.example.sportsspace.model.dashboardmodel.DashboardModel;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 import java.util.List;
 
-public class DashBoardListAdapter extends RecyclerView.Adapter<DashBoardListAdapter.ViewHolder> {
+public class DashBoardListAdapter extends FirebaseRecyclerAdapter<DashboardModel , DashBoardListAdapter.ViewHolder> {
 
-    private List<DashboardModel> allNotice;
-    public DashBoardListAdapter(List<DashboardModel> allNotice) {
-        this.allNotice = allNotice;
+    public DashBoardListAdapter(@NonNull FirebaseRecyclerOptions<DashboardModel> options) {
+        super(options);
     }
 
 
@@ -35,10 +38,14 @@ public class DashBoardListAdapter extends RecyclerView.Adapter<DashBoardListAdap
 
 
     // Replace the contents of a view (invoked by the layout manager)
+//    @Override
+//    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+//
+//    }
+
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        DashboardModel dataModel = allNotice.get(position);
-        viewHolder.dashboardCardViewBinding.setDashboardmodel(dataModel);
+    protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int position, @NonNull DashboardModel model) {
+        viewHolder.dashboardCardViewBinding.setDashboardmodel(model);
         viewHolder.dashboardCardViewBinding.executePendingBindings();
     }
 
@@ -53,11 +60,5 @@ public class DashBoardListAdapter extends RecyclerView.Adapter<DashBoardListAdap
         }
     }
 
-
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return allNotice.size();
-    }
 }
 

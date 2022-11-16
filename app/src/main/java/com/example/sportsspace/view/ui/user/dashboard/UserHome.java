@@ -10,11 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.sportsspace.R;
+import com.example.sportsspace.utils.Auth;
 import com.example.sportsspace.view.ui.user.dashboard.Fragments.BookSlots;
 import com.example.sportsspace.view.ui.user.dashboard.Fragments.BookedSlots;
 import com.example.sportsspace.view.ui.common.DashboardFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -24,6 +27,17 @@ public class UserHome extends AppCompatActivity {
 
     BottomNavigationView navigationView;
     FragmentManager fragmentManager;
+
+    @Inject
+    Auth auth;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        auth.isUserLoggedIn(this);
+
+    }
 
     @SuppressLint("MissingInflatedId")
     @Override

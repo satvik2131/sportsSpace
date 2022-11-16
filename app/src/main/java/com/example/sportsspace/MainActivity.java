@@ -6,14 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.sportsspace.utils.Auth;
 import com.example.sportsspace.view.ui.admin.adminhome.AdminHome;
 import com.example.sportsspace.view.ui.admin.login.AdminLogin;
 import com.example.sportsspace.view.ui.user.dashboard.UserHome;
-import com.example.sportsspace.view.ui.user.login.OTPVerify;
 import com.example.sportsspace.view.ui.user.login.PhoneAuth;
-
-import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -31,9 +27,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, PhoneAuth.class));
     }
 
-    public void moveToOtp(View view) {
-        startActivity(new Intent(this, OTPVerify.class));
-    }
+
 
     public void moveToDashboard(View view) {
         startActivity(new Intent(getBaseContext(), UserHome.class));

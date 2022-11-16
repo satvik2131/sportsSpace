@@ -21,7 +21,6 @@
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -30,15 +29,13 @@
                 android:value="" />
         </activity>
 
-
-
         <activity android:name=".view.ui.user.login.PhoneAuth" />
+
         <activity
             android:name=".view.ui.user.dashboard.UserHome"
              />
-        <activity android:name=".view.ui.user.login.OTPVerify" />
 
-         <!--Admin-->
+        <!--Admin-->
         <activity android:name=".view.ui.admin.login.AdminLogin"/>
         <activity
             android:name=".view.ui.admin.adminhome.AdminHome" />

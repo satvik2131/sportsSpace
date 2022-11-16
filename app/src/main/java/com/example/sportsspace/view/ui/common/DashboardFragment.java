@@ -17,8 +17,11 @@ import com.example.sportsspace.model.dashboardmodel.DashboardMethods;
 import com.example.sportsspace.view.ui.user.dashboard.utils.DashBoardListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +38,7 @@ public class DashboardFragment extends Fragment {
     DashboardMethods dashboardMethods;
 
     DatabaseReference dashboardRef;
-
+    DashBoardListAdapter adapter;
 
     @Nullable
     @Override
@@ -45,10 +48,7 @@ public class DashboardFragment extends Fragment {
                 inflater, R.layout.dashboard_fragment, container, false
         );
 
-        dashboardRef = FirebaseDatabase.getInstance().getReference().child("/Dashboard");
-
-//        dashboardMethods.getDashboardInfo();
-
+        dashboardRef = FirebaseDatabase.getInstance().getReference().child("/dashboard");
 
         FirebaseRecyclerOptions<DashboardModel> options
                 = new FirebaseRecyclerOptions
@@ -56,12 +56,24 @@ public class DashboardFragment extends Fragment {
                 .setQuery(dashboardRef,DashboardModel.class)
                 .build();
 
-        DashBoardListAdapter adapter = new DashBoardListAdapter(options);
+        adapter = new DashBoardListAdapter(options);
         dashboardBinding.setMyAdapter(adapter);
         View view = dashboardBinding.getRoot();
 
         return view;
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
 }

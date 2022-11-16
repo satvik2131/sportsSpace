@@ -15,7 +15,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -56,32 +55,5 @@ public class DashboardMethods {
             Toast.makeText(context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             return false;
         }
-    }
-
-
-
-    //Get Dashboard information
-    public void getDashboardInfo(){
-        reference.child(dashboardPath).addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<DashboardModel> dashboardModelList = new ArrayList<>();
-                for(DataSnapshot snap: snapshot.getChildren()){
-                    DashboardModel data = snap.getValue(DashboardModel.class);
-                    Date date = new Date();
-                    dashboardModelList.add(new DashboardModel(data.getTitle(),data.getDescription(),date));
-                }
-
-                Log.d("hogya--",dashboardModelList.get(0).getTitle());
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
     }
 }
