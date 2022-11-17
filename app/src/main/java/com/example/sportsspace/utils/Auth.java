@@ -6,11 +6,14 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+
+import com.example.sportsspace.MainActivity;
 import com.example.sportsspace.R;
 import com.example.sportsspace.view.ui.admin.adminhome.AdminHome;
 import com.example.sportsspace.view.ui.admin.login.AdminLogin;
 import com.example.sportsspace.view.ui.user.dashboard.UserHome;
 import com.example.sportsspace.view.ui.user.login.PhoneAuth;
+import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +29,7 @@ import javax.inject.Inject;
 public class Auth {
     public String username , password;
     public Application context;
+
 
     @Inject
     public Auth(){
@@ -72,6 +76,27 @@ public class Auth {
         }else {
             context.startActivity(new Intent(context, AdminLogin.class));
         }
+    }
+
+
+    public void checkIfUserIsApproved(String uid , DatabaseReference reference , Context context){
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isApproved = snapshot.child(uid).child("status").getValue(Boolean.class);
+                if(isApproved){
+                    context.startActivity(new Intent(context , MainActivity.class));
+                }else{
+                    Toast.makeText(context, "Admin will review your profile then you can login", Toast.LENGTH_LONG).show();
+                    context.startActivity(new Intent(context, PhoneAuth.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="sportsModel"
-            type="com.example.sportsspace.model.sportsModel.SportsMethod" />
+            type="com.example.sportsspace.viewmodels.SportsMethod" />
     </data>
 
 
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     style="@style/Widget.Material3.Button.ElevatedButton"
                     android:text="Add"
-                    android:onClick="@{()->sportsModel.addSports()}"
+                    android:onClick="@{()->sportsModel.addSports(context)}"
                     android:layout_gravity="center"
                     android:layout_marginVertical="20sp" />
 

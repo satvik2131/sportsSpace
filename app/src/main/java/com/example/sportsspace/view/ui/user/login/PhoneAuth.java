@@ -8,11 +8,18 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.sportsspace.model.User.UserData;
 import com.example.sportsspace.utils.Auth;
+import com.example.sportsspace.view.ui.user.dashboard.UserHome;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.util.Arrays;
@@ -26,12 +33,15 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class PhoneAuth extends AppCompatActivity{
 
+    DatabaseReference reference;
     @Inject
     Auth auth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        reference = FirebaseDatabase.getInstance().getReference().child("admin").child("user_requests");
 
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -61,6 +71,15 @@ public class PhoneAuth extends AppCompatActivity{
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
             // Successfully signed in
+            //Save user to user_requests after approving let the user login
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String key = user.getUid();
+
+            UserData userData = new UserData(user.getPhoneNumber() , key  ,false , false);
+            reference.child(key).setValue(userData);
+
+            //Create a check function which checks if the user is approved by the admin
+            auth.checkIfUserIsApproved(user.getUid() , reference , this);
 
             // ...
         } else {

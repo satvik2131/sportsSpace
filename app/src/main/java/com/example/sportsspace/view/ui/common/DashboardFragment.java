@@ -13,19 +13,11 @@ import androidx.fragment.app.Fragment;
 import com.example.sportsspace.R;
 import com.example.sportsspace.databinding.DashboardFragmentBinding;
 import com.example.sportsspace.model.dashboardmodel.DashboardModel;
-import com.example.sportsspace.model.dashboardmodel.DashboardMethods;
+import com.example.sportsspace.viewmodels.DashboardMethods;
 import com.example.sportsspace.view.ui.user.dashboard.utils.DashBoardListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.inject.Inject;
 

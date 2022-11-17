@@ -1,4 +1,4 @@
-package com.example.sportsspace.model.dashboardmodel;
+package com.example.sportsspace.viewmodels;
 
 
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.sportsspace.model.dashboardmodel.DashboardModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sportsspace.R;
 import com.example.sportsspace.databinding.AddInfoBinding;
-import com.example.sportsspace.model.dashboardmodel.DashboardMethods;
+import com.example.sportsspace.viewmodels.DashboardMethods;
 import com.example.sportsspace.viewmodels.AddInfoDashVM;
 
 

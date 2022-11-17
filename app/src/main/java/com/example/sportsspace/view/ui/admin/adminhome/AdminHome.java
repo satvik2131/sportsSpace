@@ -1,7 +1,6 @@
 package com.example.sportsspace.view.ui.admin.adminhome;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,11 +15,11 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.sportsspace.R;
 import com.example.sportsspace.utils.Auth;
+import com.example.sportsspace.utils.NotificationHandler;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_info.AddInfoDashboard;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_sports.AddSports;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.existingremoveuser.ExistingRemoveUser;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.user_requests.UserRequests;
-import com.example.sportsspace.view.ui.admin.login.AdminLogin;
 import com.example.sportsspace.view.ui.common.DashboardFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -36,12 +35,16 @@ public class AdminHome extends AppCompatActivity {
     FragmentManager fragmentManager;
 
     @Inject
+    NotificationHandler trigger;
+
+    @Inject
     Auth auth;
 
     @Override
     protected void onStart() {
         super.onStart();
         auth.isAdminLoggedIn(this);
+        trigger.userAddListener(this);
     }
 
     @SuppressLint("MissingInflatedId")
@@ -49,7 +52,6 @@ public class AdminHome extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adminhome);
-
 
 
         //Setup for opening and closing drawer

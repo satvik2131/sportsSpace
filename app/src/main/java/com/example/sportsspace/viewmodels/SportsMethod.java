@@ -1,6 +1,8 @@
-package com.example.sportsspace.model.sportsModel;
+package com.example.sportsspace.viewmodels;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -14,7 +16,7 @@ public class SportsMethod {
 
     public String sport;
 
-    public void addSports(){
+    public void addSports(Context context){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("sports");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -22,6 +24,8 @@ public class SportsMethod {
                 int countOfSports = (int) snapshot.getChildrenCount() + 1;
                 String count = String.valueOf(countOfSports);
                 reference.child(count).setValue(sport);
+
+                Toast.makeText(context, "Sports Added", Toast.LENGTH_SHORT).show();
             }
 
             @Override

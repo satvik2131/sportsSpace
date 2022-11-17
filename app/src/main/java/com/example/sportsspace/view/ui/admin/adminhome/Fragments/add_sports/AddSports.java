@@ -1,7 +1,6 @@
 package com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_sports;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sportsspace.R;
 import com.example.sportsspace.databinding.AddSportsBinding;
-import com.example.sportsspace.model.sportsModel.SportsData;
-import com.example.sportsspace.model.sportsModel.SportsMethod;
+import com.example.sportsspace.viewmodels.SportsMethod;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

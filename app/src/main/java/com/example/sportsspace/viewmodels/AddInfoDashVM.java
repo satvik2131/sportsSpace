@@ -1,7 +1,5 @@
 package com.example.sportsspace.viewmodels;
 
-import com.example.sportsspace.model.dashboardmodel.DashboardMethods;
-
 import java.util.Observable;
 
 public class AddInfoDashVM extends Observable {
