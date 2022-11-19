@@ -6,7 +6,7 @@
     <data>
         <variable
             name="myAdapter"
-            type="com.example.sportsspace.view.ui.user.dashboard.utils.DashBoardListAdapter" />
+            type="com.example.sportsspace.view.ui.user.dashboard.adapter.DashBoardListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

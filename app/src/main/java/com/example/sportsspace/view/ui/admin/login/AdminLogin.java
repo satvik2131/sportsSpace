@@ -21,7 +21,7 @@ public class AdminLogin extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        auth.isAdminLoggedIn(this);
+//        auth.isAdminLoggedIn(this);
     }
 
     @Override

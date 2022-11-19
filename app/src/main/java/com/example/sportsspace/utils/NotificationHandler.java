@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.sportsspace.R;
-import com.example.sportsspace.model.User.UserData;
+import com.example.sportsspace.model.userdata.UserData;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +22,8 @@ import javax.inject.Inject;
 
 public class NotificationHandler {
     DatabaseReference reference;
+    @Inject
+    Auth auth;
 
     @Inject
     public NotificationHandler(){}
@@ -34,9 +36,14 @@ public class NotificationHandler {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 UserData userData = snapshot.getValue(UserData.class);
-                if(!userData.isSeen()){
-                    //Create a notification
-                    notification(context);
+
+                if(auth.typeOfUser(context).equals("Admin")){
+                    if(!userData.isSeen()){
+                        //Create a notification
+                        notification(context);
+                    }
+                }else{
+                    return;
                 }
             }
 

@@ -117,7 +117,7 @@ public class AdminHome extends AppCompatActivity {
                         break;
 
                     case "Logout":
-                        //Implement Logout functionality here
+                        auth.adminLogout(AdminHome.this);
                         break;
                 }
                 return false;

@@ -1,4 +1,4 @@
-package com.example.sportsspace.view.ui.user.dashboard.utils;
+package com.example.sportsspace.view.ui.user.dashboard.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

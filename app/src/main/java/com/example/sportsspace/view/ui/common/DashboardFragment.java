@@ -14,7 +14,7 @@ import com.example.sportsspace.R;
 import com.example.sportsspace.databinding.DashboardFragmentBinding;
 import com.example.sportsspace.model.dashboardmodel.DashboardModel;
 import com.example.sportsspace.viewmodels.DashboardMethods;
-import com.example.sportsspace.view.ui.user.dashboard.utils.DashBoardListAdapter;
+import com.example.sportsspace.view.ui.user.dashboard.adapter.DashBoardListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

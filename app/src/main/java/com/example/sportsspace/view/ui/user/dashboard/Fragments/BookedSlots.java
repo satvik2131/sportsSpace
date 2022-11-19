@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsspace.R;
-import com.example.sportsspace.view.ui.user.dashboard.utils.BookedSlotsAdapter;
+import com.example.sportsspace.view.ui.user.dashboard.adapter.BookedSlotsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

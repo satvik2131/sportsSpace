@@ -1,70 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="@style/Widget.Material3.CardView.Elevated"
-    android:layout_margin="20sp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="existingRequest"
+            type="com.example.sportsspace.model.userdata.UserData"/>
+
+        <variable
+            name="itemClickListener"
+            type="com.example.sportsspace.model.userdata.CustomClickListener" />
+    </data>
+
+
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        style="@style/Widget.Material3.CardView.Elevated"
+        android:layout_margin="20sp">
 
-        <!--       Name and phone Number-->
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20sp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="horizontal">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/existing_user_username"
+            <!--       Name and phone Number-->
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gotham"
-                android:text="Satvik Kushwaha" />
+                android:layout_margin="20sp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/existing_user_phoneno"
+<!--                Username-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/existing_user_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gotham"
+                    android:text="@{existingRequest.name}"
+                    />
+
+<!--                Userphone-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/existing_user_phoneno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/calibri"
+                    android:text="@{existingRequest.phoneno}" />
+
+            </LinearLayout>
+
+
+            <!--        Accept and reject -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/calibri"
-                android:text="7509593038" />
-
-        </LinearLayout>
-
-
-
-        <!--        Accept and reject -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
 
+                <ImageButton
+                    android:id="@+id/reject_user"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:layout_marginRight="20sp"
+                    android:background="@null"
+                    android:onClick="@{()->itemClickListener.userDeclined(existingRequest)}"
+                    android:src="@drawable/reject_user" />
 
-            <ImageButton
-                android:id="@+id/reject_user"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:layout_marginRight="20sp"
-                android:background="@null"
-                android:src="@drawable/reject_user" />
-
-        </LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
 
-</com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,7 +1,6 @@
-package com.example.sportsspace.view.ui.user.dashboard.utils;
+package com.example.sportsspace.view.ui.user.dashboard.adapter;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,8 +13,6 @@ import com.example.sportsspace.databinding.DashboardCardViewBinding;
 import com.example.sportsspace.model.dashboardmodel.DashboardModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-
-import java.util.List;
 
 public class DashBoardListAdapter extends FirebaseRecyclerAdapter<DashboardModel , DashBoardListAdapter.ViewHolder> {
 

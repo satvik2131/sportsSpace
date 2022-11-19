@@ -1,14 +1,30 @@
-package com.example.sportsspace.model.User;
+package com.example.sportsspace.model.userdata;
 
 public class UserData {
-    String phoneno , uid;
+    String phoneno;
+    String uid;
+
+
+    String name;
     boolean status , seen;
 
 
-    public UserData(String phoneno , String uid , boolean seen, boolean status ){
+    public UserData( String name, String phoneno , String uid , boolean seen, boolean status ){
         this.phoneno = phoneno;
         this.status = status;
         this.seen = seen;
+        this.name = name;
+        this.uid = uid;
+    }
+
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 

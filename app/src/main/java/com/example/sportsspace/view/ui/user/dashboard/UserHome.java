@@ -81,6 +81,9 @@ public class UserHome extends AppCompatActivity {
                                 .setReorderingAllowed(true)
                                 .commit();
                         break;
+
+                    case "Logout":
+                        auth.userLogout(UserHome.this);
                 }
 
                 return false;

@@ -1,44 +1,63 @@
 package com.example.sportsspace.view.ui.admin.adminhome.Fragments.user_requests;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sportsspace.R;
+import com.example.sportsspace.databinding.UserRequestsBinding;
+import com.example.sportsspace.model.userdata.UserData;
+import com.example.sportsspace.view.ui.admin.adminhome.adapter.UserRequestsAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserRequests extends Fragment {
-    RecyclerView userRequests;
+    DatabaseReference userRequestReference;
+    UserRequestsAdapter adapter;
 
-    public UserRequests(){
-        super(R.layout.user_requests);
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        UserRequestsBinding userRequestBinding = DataBindingUtil.inflate(
+                inflater, R.layout.user_requests, container, false
+        );
+
+        userRequestReference = FirebaseDatabase.getInstance().getReference().child("/admin/user_requests");
+
+        FirebaseRecyclerOptions<UserData> options
+                = new FirebaseRecyclerOptions
+                .Builder<UserData>()
+                .setQuery(userRequestReference,UserData.class)
+                .build();
+
+        adapter = new UserRequestsAdapter(options,getContext());
+        userRequestBinding.setAdminrequestAdapter(adapter);
+        View view = userRequestBinding.getRoot();
+
+        return view;
+
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        userRequests = view.findViewById(R.id.user_requests_recycler_view);
-
-        List<String> usernames = new ArrayList<>();
-        usernames.add("Harsh");
-        usernames.add("Rahul");
-
-        List<String> phoneno = new ArrayList<>();
-        phoneno.add("899889345");
-        phoneno.add("234234234");
-
-
-        UserRequestsAdapter adapter = new UserRequestsAdapter(usernames,phoneno);
-        userRequests.setLayoutManager(new LinearLayoutManager(getContext()));
-        userRequests.setHasFixedSize(true);
-        userRequests.setAdapter(adapter);
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+
 }
