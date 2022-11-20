@@ -18,6 +18,7 @@ import com.example.sportsspace.utils.Auth;
 import com.example.sportsspace.utils.NotificationHandler;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_info.AddInfoDashboard;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.add_sports.AddSports;
+import com.example.sportsspace.view.ui.admin.adminhome.Fragments.admin_booked_slots.AdminBookedSlots;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.existingremoveuser.ExistingRemoveUser;
 import com.example.sportsspace.view.ui.admin.adminhome.Fragments.user_requests.UserRequests;
 import com.example.sportsspace.view.ui.common.DashboardFragment;
@@ -43,7 +44,7 @@ public class AdminHome extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        auth.isAdminLoggedIn(this);
+//        auth.isAdminLoggedIn(this);
         trigger.userAddListener(this);
     }
 
@@ -111,6 +112,15 @@ public class AdminHome extends AppCompatActivity {
                         fragmentManager
                                 .beginTransaction()
                                 .replace(R.id.admin_fragment, ExistingRemoveUser.class, null)
+                                .setReorderingAllowed(true)
+                                .commit();
+                        drawerLayout.close();
+                        break;
+
+                    case "Booked Slots":
+                        fragmentManager
+                                .beginTransaction()
+                                .replace(R.id.admin_fragment, AdminBookedSlots.class,null)
                                 .setReorderingAllowed(true)
                                 .commit();
                         drawerLayout.close();

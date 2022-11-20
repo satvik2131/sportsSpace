@@ -10,20 +10,26 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sportsspace.MainActivity;
 import com.example.sportsspace.model.userdata.UserData;
 import com.example.sportsspace.utils.Auth;
+import com.example.sportsspace.view.ui.user.dashboard.UserHome;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.Arrays;
@@ -46,7 +52,7 @@ public class PhoneAuth extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("admin").child("user_requests");
+        reference = FirebaseDatabase.getInstance().getReference().child("admin");
 
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -73,18 +79,46 @@ public class PhoneAuth extends AppCompatActivity {
         if (result.getResultCode() == RESULT_OK) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String key = user.getUid();
-            Log.d("name---",name);
-
             UserData userData = new UserData(name, user.getPhoneNumber(), key, false, false);
-            reference.child(key).setValue(userData);
+            //If user is already registered , don't save new node to database
+            checkIfUserExist(key , userData);
 
-            //Create a check function which checks if the user is approved by the admin
-            auth.checkIfUserIsApproved(user.getUid(), reference, this);
+            //if the user is approved by the admin then only redirect to dashboard
+//            boolean userAuth =
+                    auth.checkUserIsAuthorized(this);
+//            if (userAuth) {
+//                startActivity(new Intent(this, UserHome.class));
+//            } else {
+//                startActivity(new Intent(this, MainActivity.class));
+//            }
 
         } else {
-
             Toast.makeText(this, response.getError().getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    //If user exists , don't create redundant data
+    public void checkIfUserExist(String key , UserData userData) {
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if ((snapshot.child("user_requests").child(key).exists()) != true &&
+                        (snapshot.child("approved_user").child(key).exists()) != true
+                ) {
+                    reference.child("admin").child("user_requests").child(key).setValue(userData);
+                }else{
+                    return;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
     }
 
 
@@ -96,25 +130,25 @@ public class PhoneAuth extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         boite
-            .setView(input)
-            .setPositiveButton("Done", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (input.toString().isEmpty()) {
-                        Toast.makeText(PhoneAuth.this, "Enter name", Toast.LENGTH_SHORT).show();
-                    } else {
-                        name = input.getText().toString();
+                .setView(input)
+                .setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (input.toString().isEmpty()) {
+                            Toast.makeText(PhoneAuth.this, "Enter name", Toast.LENGTH_SHORT).show();
+                        } else {
+                            name = input.getText().toString();
 
-                        // Create and launch sign-in intent
-                        Intent signInIntent = AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setIsSmartLockEnabled(false)
-                                .setAvailableProviders(providers)
-                                .build();
-                        signInLauncher.launch(signInIntent);
+                            // Create and launch sign-in intent
+                            Intent signInIntent = AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setIsSmartLockEnabled(false)
+                                    .setAvailableProviders(providers)
+                                    .build();
+                            signInLauncher.launch(signInIntent);
 
+                        }
                     }
-                }
-            }).show();
+                }).show();
     }
 }

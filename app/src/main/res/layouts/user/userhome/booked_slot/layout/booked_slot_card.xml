@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="bookedSlot"
+            type="com.example.sportsspace.model.bookslot.BookSlot" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/information_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:cardElevation="3dp"
+        app:cardMaxElevation="4dp"
+        app:cardUseCompatPadding="true"
+        android:layout_margin="16sp"
+        android:layout_marginHorizontal="40sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="">
+
+            <!--        Sport -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:fontFamily="@font/calibri"
+                android:text="Sports" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/teal_200"
+                android:layout_marginLeft="10sp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/selected_sports"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="05sp"
+                    android:fontFamily="@font/gotham"
+                    android:text="@{bookedSlot.sport}" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--        Selected Date-->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:fontFamily="@font/calibri"
+                android:text="Selected Date" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/teal_200"
+                android:layout_marginLeft="10sp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/dateofslot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="05sp"
+                    android:fontFamily="@font/gotham"
+                    android:text="@{bookedSlot.date.replace(`_`,` `)}" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--        Selected Time-->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:fontFamily="@font/calibri"
+                android:text="Start Time" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/teal_200"
+                android:layout_marginLeft="10sp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/timeofslot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="05sp"
+                    android:fontFamily="@font/gotham"
+                    android:text="@{bookedSlot.startHour + `:` +bookedSlot.startMinute}" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--        Duration-->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:fontFamily="@font/calibri"
+                android:text="End Time" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/teal_200"
+                android:layout_marginLeft="10sp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/durationofslot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="05sp"
+                    android:fontFamily="@font/gotham"
+                    android:text="@{bookedSlot.endHour+`:`+bookedSlot.endMinute}" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

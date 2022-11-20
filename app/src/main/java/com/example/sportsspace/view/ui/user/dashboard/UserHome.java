@@ -35,7 +35,7 @@ public class UserHome extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        auth.isUserLoggedIn(this);
+//        auth.checkUserIsAuthorized();
 
     }
 

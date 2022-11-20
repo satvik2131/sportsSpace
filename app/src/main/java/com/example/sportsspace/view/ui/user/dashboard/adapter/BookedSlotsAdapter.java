@@ -1,73 +1,57 @@
 package com.example.sportsspace.view.ui.user.dashboard.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsspace.R;
+import com.example.sportsspace.databinding.BookedSlotCardBinding;
+import com.example.sportsspace.model.bookslot.BookSlot;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-import java.util.List;
+public class BookedSlotsAdapter extends FirebaseRecyclerAdapter<BookSlot, BookedSlotsAdapter.ViewHolder> {
+    Context context ;
 
-public class BookedSlotsAdapter extends RecyclerView.Adapter<BookedSlotsAdapter.ViewHolder> {
-
-    private List<String> sports;
-    private List<String> dateOfSlot;
-    private List<String> timeOfSlot;
-    private List<String> durationOfSlot;
-
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private  TextView sportsTV ,dateOfSlotTV , timeOfSlotTV , durationOfSlotTV;
-
-        public ViewHolder(View view) {
-            super(view);
-            // Define click listener for the ViewHolder's View
-
-            sportsTV = (TextView) view.findViewById(R.id.selected_sports);
-            dateOfSlotTV = (TextView) view.findViewById(R.id.dateofslot);
-            timeOfSlotTV = (TextView) view.findViewById(R.id.timeofslot);
-            durationOfSlotTV = (TextView) view.findViewById(R.id.durationofslot);
-        }
+    public BookedSlotsAdapter(@NonNull FirebaseRecyclerOptions<BookSlot> options , Context context) {
+        super(options);
+        this.context = context;
     }
 
-
-    public BookedSlotsAdapter(List<String> sports,
-                                List<String> dateOfSlot,
-                                List<String> timeOfSlot ,
-                                List<String> durationOfSlot) {
-        this.sports = sports;
-        this.dateOfSlot = dateOfSlot;
-        this.timeOfSlot = timeOfSlot;
-        this.durationOfSlot = durationOfSlot;
-    }
 
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.booked_slot_card_view, viewGroup, false);
 
-        return new ViewHolder(view);
+        BookedSlotCardBinding bookedSlotCardViewBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(viewGroup.getContext()),
+                R.layout.booked_slot_card,viewGroup,false
+        );
+
+        return new ViewHolder(bookedSlotCardViewBinding);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
-        viewHolder.sportsTV.setText(sports.get(position));
-        viewHolder.dateOfSlotTV.setText(dateOfSlot.get(position));
-        viewHolder.timeOfSlotTV.setText(timeOfSlot.get(position));
-        viewHolder.durationOfSlotTV.setText(durationOfSlot.get(position));
+    protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int position, @NonNull BookSlot model) {
+        viewHolder.bookedSlotCardViewBinding.setBookedSlot(model);
+        viewHolder.bookedSlotCardViewBinding.executePendingBindings();
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return sports.size();
+
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public BookedSlotCardBinding bookedSlotCardViewBinding;
+
+        public ViewHolder(BookedSlotCardBinding binding) {
+            super(binding.getRoot());
+            this.bookedSlotCardViewBinding = binding;
+        }
     }
+
 }
 

@@ -62,7 +62,7 @@ public class ExistingUsersAdapter extends FirebaseRecyclerAdapter<UserData, Exis
 
     @Override
     public void userDeclined(UserData f) {
-        removeUser(reference.child("admin").child("user_requests").child(f.getUid()));
+        removeUser(reference.child("admin").child("approved_user").child(f.getUid()));
     }
 
 

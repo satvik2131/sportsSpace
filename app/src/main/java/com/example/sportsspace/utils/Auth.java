@@ -35,24 +35,6 @@ public class Auth {
     public Auth() {
     }
 
-    //User Authorization
-    public boolean isUserLoggedIn(Context context) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-
-            //IF current activity is not already UserHome then redirect to Userhome
-            if (context.getClass().getSimpleName().equals("UserHome") != true) {
-                context.startActivity(new Intent(context, UserHome.class));
-            }
-
-            // User is signed in
-            return true;
-        } else {
-            // No user is signed in
-            context.startActivity(new Intent(context, PhoneAuth.class));
-            return false;
-        }
-    }
 
     public String typeOfUser(Context context) {
         //Getting user and admin auth points , if any one of them is valid return that
@@ -121,24 +103,47 @@ public class Auth {
     }
 
 
-    public void checkIfUserIsApproved(String uid, DatabaseReference reference, Context context) {
-        reference.addValueEventListener(new ValueEventListener() {
+    public void checkUserIsAuthorized(Context context) {
+        boolean[] isApproved = new boolean[1];
+        DatabaseReference adminRef = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("admin");
+
+        String className = context.getClass().getSimpleName();
+        Intent mainActivityIntent = new Intent(context, MainActivity.class);
+        Intent userHomeIntent = new Intent(context, UserHome.class);
+
+        //Check if the user is logged in
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //this other && condition is for preventing recursion on activities
+        if (user == null && className != "MainActivity") {
+            context.startActivity(mainActivityIntent);
+        }
+
+        String uid = user.getUid();
+
+        adminRef.child("approved_user").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean isApproved = snapshot.child(uid).child("status").getValue(Boolean.class);
-                if (isApproved) {
-                    context.startActivity(new Intent(context, UserHome.class));
-                } else {
-                    Toast.makeText(context, "Admin will review your profile then you can login", Toast.LENGTH_LONG).show();
-                    context.startActivity(new Intent(context, MainActivity.class));
+                boolean isUserApproved = snapshot.child(uid).exists();
+                if (isUserApproved && className!="UserHome") {
+                    context.startActivity(userHomeIntent);
+                }else if(isUserApproved!=true && className!="MainActivity"){
+                    context.startActivity(mainActivityIntent);
+                }else{
+                    //If it is in the same class it has to be
+                    //do nothing
+                    return;
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
+
+
     }
 
 

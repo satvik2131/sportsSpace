@@ -68,11 +68,15 @@ public class UserRequestsAdapter extends FirebaseRecyclerAdapter<UserData, UserR
 
                         //Move data to new database
                         DatabaseReference approvedUser = reference.child("admin").child("approved_user");
-                        approvedUser.child(data.getUid()).setValue(data);
+                        if(approvedUser!=null){
+                            approvedUser.child(data.getUid()).setValue(data);
 
-                        //Remove data from this database
-                        removeUser(reference.child("admin").child("user_requests").child(f.getUid()));
-                        Toast.makeText(context, "User Approved", Toast.LENGTH_SHORT).show();
+                            //Remove data from this database
+                            removeUser(reference.child("admin").child("user_requests").child(f.getUid()));
+                            Toast.makeText(context, "User Approved", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(context, "No Data", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override

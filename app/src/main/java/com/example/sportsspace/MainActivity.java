@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
 
         String typeOfUser = auth.typeOfUser(this);
 
@@ -32,9 +31,12 @@ public class MainActivity extends AppCompatActivity {
             auth.isAdminLoggedIn(this);
             finish();
         }else if(typeOfUser.equals("User")){
-            auth.isUserLoggedIn(this);
-            finish();
+            auth.checkUserIsAuthorized(this);
         }
+
+        setContentView(R.layout.main);
+
+
     }
 
     public void moveToLogin(View view) {

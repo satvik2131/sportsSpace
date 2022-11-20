@@ -31,6 +31,8 @@ android {
                     'src/main/res/layouts/admin/adminhome/add_sports',
                     'src/main/res/layouts/admin/adminhome/add_info_dashboard',
                     'src/main/res/layouts/admin/adminhome/existing_remove_user',
+                    'src/main/res/layouts/admin/adminhome/admin_booked_slots',
+
 
 
                     //User

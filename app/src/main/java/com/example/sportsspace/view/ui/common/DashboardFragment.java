@@ -40,7 +40,7 @@ public class DashboardFragment extends Fragment {
                 inflater, R.layout.dashboard_fragment, container, false
         );
 
-        dashboardRef = FirebaseDatabase.getInstance().getReference().child("/dashboard");
+        dashboardRef = FirebaseDatabase.getInstance().getReference().child("dashboard");
 
         FirebaseRecyclerOptions<DashboardModel> options
                 = new FirebaseRecyclerOptions

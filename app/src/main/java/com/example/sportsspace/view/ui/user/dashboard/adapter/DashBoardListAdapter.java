@@ -34,12 +34,6 @@ public class DashBoardListAdapter extends FirebaseRecyclerAdapter<DashboardModel
     }
 
 
-    // Replace the contents of a view (invoked by the layout manager)
-//    @Override
-//    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-//
-//    }
-
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int position, @NonNull DashboardModel model) {
         viewHolder.dashboardCardViewBinding.setDashboardmodel(model);

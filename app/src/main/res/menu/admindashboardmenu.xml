@@ -41,6 +41,12 @@
 
 
     <item
+        android:id="@+id/admin_slot"
+        android:icon="@drawable/booked_slots"
+        android:checkable="true"
+        android:title="Booked Slots" />
+
+    <item
         android:id="@+id/admin_logout"
         android:icon="@drawable/logout"
         android:checkable="true"
