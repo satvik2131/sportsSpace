@@ -46,15 +46,12 @@ public class PhoneAuth extends AppCompatActivity {
 
     DatabaseReference reference;
     String name;
-    SharedData data;
     @Inject
     Auth auth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        data = new SharedData(this);
         reference = FirebaseDatabase.getInstance().getReference().child("admin");
 
         // Choose authentication providers
@@ -85,10 +82,13 @@ public class PhoneAuth extends AppCompatActivity {
             UserData userData = new UserData(name, user.getPhoneNumber(), key, false, false);
             //If user is already registered , don't save new node to database
             checkIfUserExist(key, userData);
+            //If user is logged in as admin , then logout and set type of user as "user"
+            if(auth.typeOfUser(this).equals("admin")){
+               auth.adminLogout(this);
+            }
 
-
+            auth.userLoginSetUser(this);
             auth.checkUserIsAuthorized(this);
-
 
         } else {
             Toast.makeText(this, response.getError().getMessage(), Toast.LENGTH_SHORT).show();
@@ -98,6 +98,7 @@ public class PhoneAuth extends AppCompatActivity {
 
     //If user exists , don't create redundant data
     public void checkIfUserExist(String key, UserData userData) {
+        Log.d("method 1","Check if user exist");
         reference.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -109,6 +110,7 @@ public class PhoneAuth extends AppCompatActivity {
                         approvedUserExistenceCheck == false
                 ) {
                     reference.child("user_requests").child(key).setValue(userData);
+                    return;
                 } else {
                     return;
                 }
@@ -121,7 +123,7 @@ public class PhoneAuth extends AppCompatActivity {
     }
 
 
-    //Login ui with username popup
+    //Login ui with username popup UI
     public void loginPage(List<AuthUI.IdpConfig> providers) {
         AlertDialog.Builder boite;
         boite = new AlertDialog.Builder(this);

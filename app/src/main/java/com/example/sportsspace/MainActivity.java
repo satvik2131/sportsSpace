@@ -27,11 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
         String typeOfUser = auth.typeOfUser(this);
 
-        if(typeOfUser.equals("Admin")){
+        if(typeOfUser.equals("admin")){
             auth.isAdminLoggedIn(this);
             finish();
-        }else if(typeOfUser.equals("User")){
+        }else if(typeOfUser.equals("user")){
             auth.checkUserIsAuthorized(this);
+            finish();
         }
 
         setContentView(R.layout.main);
