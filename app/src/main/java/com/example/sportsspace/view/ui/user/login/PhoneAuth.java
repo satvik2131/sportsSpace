@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.sportsspace.MainActivity;
 import com.example.sportsspace.model.userdata.UserData;
 import com.example.sportsspace.utils.Auth;
+import com.example.sportsspace.utils.SharedData;
 import com.example.sportsspace.view.ui.user.dashboard.UserHome;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -45,6 +46,7 @@ public class PhoneAuth extends AppCompatActivity {
 
     DatabaseReference reference;
     String name;
+    SharedData data;
     @Inject
     Auth auth;
 
@@ -52,6 +54,7 @@ public class PhoneAuth extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        data = new SharedData(this);
         reference = FirebaseDatabase.getInstance().getReference().child("admin");
 
         // Choose authentication providers
@@ -81,16 +84,11 @@ public class PhoneAuth extends AppCompatActivity {
             String key = user.getUid();
             UserData userData = new UserData(name, user.getPhoneNumber(), key, false, false);
             //If user is already registered , don't save new node to database
-            checkIfUserExist(key , userData);
+            checkIfUserExist(key, userData);
 
-            //if the user is approved by the admin then only redirect to dashboard
-//            boolean userAuth =
-                    auth.checkUserIsAuthorized(this);
-//            if (userAuth) {
-//                startActivity(new Intent(this, UserHome.class));
-//            } else {
-//                startActivity(new Intent(this, MainActivity.class));
-//            }
+
+            auth.checkUserIsAuthorized(this);
+
 
         } else {
             Toast.makeText(this, response.getError().getMessage(), Toast.LENGTH_SHORT).show();
@@ -99,17 +97,19 @@ public class PhoneAuth extends AppCompatActivity {
 
 
     //If user exists , don't create redundant data
-    public void checkIfUserExist(String key , UserData userData) {
-
+    public void checkIfUserExist(String key, UserData userData) {
         reference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean userReqExistenceCheck = (snapshot.child("user_requests").child(key).exists());
+                boolean approvedUserExistenceCheck = (snapshot.child("approved_user").child(key).exists());
 
-                if ((snapshot.child("user_requests").child(key).exists()) != true &&
-                        (snapshot.child("approved_user").child(key).exists()) != true
+                if (userReqExistenceCheck == false &&
+                        approvedUserExistenceCheck == false
                 ) {
-                    reference.child("admin").child("user_requests").child(key).setValue(userData);
-                }else{
+                    reference.child("user_requests").child(key).setValue(userData);
+                } else {
                     return;
                 }
             }
@@ -118,10 +118,10 @@ public class PhoneAuth extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
 
 
+    //Login ui with username popup
     public void loginPage(List<AuthUI.IdpConfig> providers) {
         AlertDialog.Builder boite;
         boite = new AlertDialog.Builder(this);

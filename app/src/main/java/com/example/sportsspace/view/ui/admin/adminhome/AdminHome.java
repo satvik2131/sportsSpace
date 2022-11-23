@@ -54,7 +54,6 @@ public class AdminHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adminhome);
 
-
         //Setup for opening and closing drawer
         drawerLayout = findViewById(R.id.admin_drawer_layout);
         toolbar = findViewById(R.id.admin_toolbar);

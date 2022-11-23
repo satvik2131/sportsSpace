@@ -30,18 +30,20 @@ import javax.inject.Inject;
 //Authentication and Authorization based functions (Firebase)
 public class Auth {
     public String username, password;
+    SharedData sharedData;
 
     @Inject
     public Auth() {
+        sharedData = new SharedData();
     }
 
 
     public String typeOfUser(Context context) {
         //Getting user and admin auth points , if any one of them is valid return that
         //Admin
-        SharedPreferences sharedPreferences = context.
-                getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
-        boolean result = sharedPreferences.getBoolean("adminIsLoggedIn", false);
+//        SharedPreferences sharedPreferences = context.
+//                getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
+        String result = sharedData.getTypeOfUser(context);
 
         //User
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,13 +84,10 @@ public class Auth {
 
     //Admin AUTH check
     public void isAdminLoggedIn(Context context) {
-
-        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
-        boolean result = sharedPreferences.getBoolean("adminIsLoggedIn", false);
+        boolean result = sharedData.isAdminLoggedIn();
 
         if (result) {
             String simpleName = context.getClass().getSimpleName();
-
             //IF current activity is not Admin home already then redirect
             if (simpleName.equals("AdminHome") != true) {
                 Intent moveToAdminHome = new Intent(context, AdminHome.class);
@@ -104,7 +103,6 @@ public class Auth {
 
 
     public void checkUserIsAuthorized(Context context) {
-        boolean[] isApproved = new boolean[1];
         DatabaseReference adminRef = FirebaseDatabase
                 .getInstance()
                 .getReference()
@@ -117,7 +115,7 @@ public class Auth {
         //Check if the user is logged in
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //this other && condition is for preventing recursion on activities
-        if (user == null && className != "MainActivity") {
+        if (user == null && className.equals("MainActivity") != true) {
             context.startActivity(mainActivityIntent);
         }
 
@@ -127,11 +125,11 @@ public class Auth {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean isUserApproved = snapshot.child(uid).exists();
-                if (isUserApproved && className!="UserHome") {
+                if (isUserApproved && className.equals("UserHome") != true) {
                     context.startActivity(userHomeIntent);
-                }else if(isUserApproved!=true && className!="MainActivity"){
+                } else if (isUserApproved != true && className.equals("MainActivity") != true) {
                     context.startActivity(mainActivityIntent);
-                }else{
+                } else {
                     //If it is in the same class it has to be
                     //do nothing
                     return;
@@ -156,19 +154,14 @@ public class Auth {
                 String dbUsername = snapshot.child("username").getValue(String.class);
                 String dbPassword = snapshot.child("password").getValue(String.class);
                 boolean finalResult = dbUsername.equals(username) && dbPassword.equals(password) ? true : false;
-                Log.d("FinalResult -", String.valueOf(finalResult));
 
                 if (finalResult) {
                     //Authenticated
                     Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show();
-//                    //Save admin auth status
-                    SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putBoolean("adminIsLoggedIn", true);
-                    editor.apply();
-
+                    //Save admin auth status
+                    sharedData.setUserLoggedIn(true);
+                    sharedData.setTypeOfUser("admin");
                     context.startActivity(new Intent(context, AdminHome.class));
-
                 } else {
                     //Wrong Credentials
                     Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
